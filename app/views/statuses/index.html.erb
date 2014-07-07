@@ -2,7 +2,15 @@
   <h3> All of the Statuses</h3>
 </div>
 
+
+<%if user_signed_in? %>
+<li><%= link_to "All Statuses",  statuses_path %></li>
 <%= link_to "Post a New Status" , new_status_path, class: "btn btn-success" %>
+
+<% else %>
+              <li><%= link_to "Log in", login_path %></li>
+              <li><%= link_to "Sign-Up",register_path %></li>
+            <% end %>
 
 <% @statuses.each do |status| %>
     <div class="status">
@@ -12,10 +20,13 @@
       <p><%= status.content%> </p>
       <div class="meta">
         <%= link_to time_ago_in_words(status.created_at) +" ago ", status %> 
+        
+<%if user_signed_in? %>
         <span class="admin">
           <%= link_to "Edit", edit_status_path(status) %> |
           <%= link_to "Delete", status, method: :delete, data: { confirm: "Are you sure want to delete this emp details?"} %> 
-        </spam>
+        </span>
+<% end %>
       </div>
     </div>
 

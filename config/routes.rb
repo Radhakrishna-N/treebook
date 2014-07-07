@@ -4,11 +4,13 @@ Treebook::Application.routes.draw do
   devise_scope :user do
     get 'register', to: 'devise/registrations#new', as: :register
     get 'login', to: 'devise/sessions#new', as: :login
+    #root to: 'devise/sessions#new', as: :login # making login page as root page always
     get 'logout', to: 'devise/sessions#destroy', as: :logout
-  end
+    end
   resources :statuses
   get 'feeds', to: 'statuses#index', as: :feeds
-  root to: 'statuses#index'
+  
+  root to: 'statuses#index' #removed index page as root 
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
